@@ -3,169 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sky Villa BMT — Kho Bất Động Sản</title>
+<title>Sky Villa BMT</title>
 <style>
-  :root {
-    --green: #1a6b45;
-    --green-light: #e8f5ee;
-    --green-mid: #2d9464;
-    --gold: #b8973a;
-    --gold-light: #fdf6e3;
-    --text: #1a1a1a;
-    --text-muted: #666;
-    --border: #e0e0e0;
-    --bg: #f7f7f5;
-    --white: #ffffff;
-    --radius: 10px;
-    --shadow: 0 2px 12px rgba(0,0,0,0.08);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
-  nav {
-    background: var(--white); border-bottom: 1px solid var(--border);
-    padding: 0 24px; display: flex; align-items: center;
-    justify-content: space-between; height: 60px;
-    position: sticky; top: 0; z-index: 100;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 10px; }
-  .logo-icon {
-    width: 36px; height: 36px; background: var(--green); border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 700; font-size: 14px;
-  }
-  .logo-text { font-weight: 700; font-size: 16px; color: var(--green); }
-  .logo-sub { font-size: 11px; color: var(--text-muted); }
-  .nav-right { display: flex; align-items: center; gap: 12px; }
-  .nav-count { font-size: 13px; color: var(--text-muted); }
-  .btn-login {
-    background: var(--green); color: white; border: none;
-    padding: 8px 16px; border-radius: 6px; font-size: 13px; cursor: pointer;
-  }
-  .btn-login:hover { background: var(--green-mid); }
-  .user-info { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-  .user-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
-  .filter-wrap {
-    background: var(--white); border-bottom: 1px solid var(--border);
-    padding: 12px 24px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-  }
-  .filter-wrap input, .filter-wrap select {
-    height: 36px; border: 1px solid var(--border); border-radius: 6px;
-    padding: 0 10px; font-size: 13px; color: var(--text); background: var(--white); outline: none;
-  }
-  .filter-wrap input { width: 180px; }
-  .filter-wrap input:focus, .filter-wrap select:focus { border-color: var(--green); }
-  .btn-reset {
-    height: 36px; border: 1px solid var(--border); border-radius: 6px;
-    padding: 0 14px; font-size: 13px; color: var(--text-muted);
-    background: transparent; cursor: pointer;
-  }
-  .btn-reset:hover { background: var(--bg); }
-  .results-bar { padding: 10px 24px; font-size: 13px; color: var(--text-muted); }
-  .results-bar strong { color: var(--text); }
-  .product-list { padding: 0 24px 32px; display: flex; flex-direction: column; gap: 14px; }
-  .card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: var(--radius); display: flex; overflow: hidden;
-    transition: box-shadow 0.2s;
-  }
-  .card:hover { box-shadow: var(--shadow); }
-  .card-gallery {
-    width: 260px; flex-shrink: 0;
-    display: grid; grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1fr 1fr; gap: 2px; background: var(--border);
-  }
-  .img-main { grid-row: span 2; position: relative; overflow: hidden; }
-  .card-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .img-placeholder {
-    width: 100%; height: 100%; background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--border); font-size: 28px;
-  }
-  .img-count {
-    position: absolute; bottom: 6px; right: 6px;
-    background: rgba(0,0,0,0.55); color: white;
-    font-size: 11px; padding: 2px 7px; border-radius: 20px;
-  }
-  .card-body { flex: 1; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-  .card-meta { font-size: 11px; color: var(--text-muted); }
-  .card-title { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.4; }
-  .card-desc {
-    font-size: 13px; color: var(--text-muted); line-height: 1.7;
-    background: var(--green-light); border-left: 3px solid var(--green-mid);
-    padding: 8px 10px; border-radius: 0 6px 6px 0; white-space: pre-line;
-  }
-  .card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-  .tag {
-    font-size: 11px; padding: 3px 9px; border-radius: 20px;
-    border: 1px solid var(--border); color: var(--text-muted); background: var(--bg);
-  }
-  .tag-price { background: var(--gold-light); border-color: var(--gold); color: #7a5f1a; font-weight: 600; }
-  .tag-loai { background: var(--green-light); border-color: var(--green-mid); color: var(--green); }
-  .agent-strip {
-    display: flex; align-items: center; gap: 8px;
-    padding-top: 8px; border-top: 1px solid var(--border); margin-top: auto;
-  }
-  .agent-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green-light); }
-  .agent-avatar-ph {
-    width: 36px; height: 36px; border-radius: 50%; background: var(--green-light);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; color: var(--green);
-    border: 2px solid var(--green-mid); flex-shrink: 0;
-  }
-  .agent-info { flex: 1; }
-  .agent-name { font-size: 13px; font-weight: 600; }
-  .agent-phone { font-size: 12px; color: var(--text-muted); }
-  .agent-code { font-size: 11px; color: var(--text-muted); }
-  .card-actions {
-    display: flex; flex-direction: column; gap: 8px;
-    padding: 14px 14px 14px 0; justify-content: center; flex-shrink: 0;
-  }
-  .btn-detail {
-    height: 34px; padding: 0 14px; border: 1px solid var(--border);
-    border-radius: 6px; font-size: 12px; color: var(--text);
-    background: var(--white); cursor: pointer; white-space: nowrap;
-  }
-  .btn-detail:hover { background: var(--bg); }
-  .btn-dl {
-    height: 34px; padding: 0 14px; border: 1px solid var(--green);
-    border-radius: 6px; font-size: 12px; color: var(--green);
-    background: var(--green-light); cursor: pointer; white-space: nowrap; display: none;
-  }
-  .btn-dl:hover { background: #c8e8d8; }
-  .logged-in .btn-dl { display: block; }
-  .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.45); z-index: 200;
-    align-items: center; justify-content: center;
-  }
-  .modal-overlay.open { display: flex; }
-  .modal { background: var(--white); border-radius: var(--radius); padding: 32px; width: 360px; text-align: center; }
-  .modal h2 { font-size: 18px; margin-bottom: 6px; color: var(--green); }
-  .modal p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
-  .btn-google {
-    width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 8px;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    font-size: 14px; font-weight: 500; cursor: pointer;
-    background: var(--white); color: var(--text); margin-bottom: 10px;
-  }
-  .btn-google:hover { background: var(--bg); }
-  .btn-cancel { font-size: 12px; color: var(--text-muted); cursor: pointer; background: none; border: none; }
-  .empty { text-align: center; padding: 48px 24px; color: var(--text-muted); font-size: 14px; }
-  footer {
-    background: var(--white); border-top: 1px solid var(--border);
-    padding: 20px 24px; text-align: center;
-    font-size: 12px; color: var(--text-muted); margin-top: 16px;
-  }
-  footer strong { color: var(--green); }
-  @media (max-width: 640px) {
-    .card { flex-direction: column; }
-    .card-gallery { width: 100%; height: 180px; }
-    .card-actions { flex-direction: row; padding: 0 14px 14px; }
-  }
+:root{--green:#1a6b45;--green-light:#e8f5ee;--green-mid:#2d9464;--gold:#b8973a;--gold-light:#fdf6e3;--text:#1a1a1a;--text-muted:#666;--border:#e0e0e0;--bg:#f7f7f5;--white:#fff;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
+.logo-text{font-weight:700;font-size:16px;color:var(--green)}
+.logo-sub{font-size:11px;color:var(--text-muted)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-count{font-size:13px;color:var(--text-muted)}
+.btn-login{background:var(--green);color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:13px;cursor:pointer}
+.btn-login:hover{background:var(--green-mid)}
+.user-info{display:flex;align-items:center;gap:8px;font-size:13px}
+.user-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid var(--green)}
+.filter-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filter-wrap input,.filter-wrap select{height:36px;border:1px solid var(--border);border-radius:6px;padding:0 10px;font-size:13px;color:var(--text);background:var(--white);outline:none}
+.filter-wrap input{width:180px}
+.filter-wrap input:focus,.filter-wrap select:focus{border-color:var(--green)}
+.btn-reset{height:36px;border:1px solid var(--border);border-radius:6px;padding:0 14px;font-size:13px;color:var(--text-muted);background:transparent;cursor:pointer}
+.btn-reset:hover{background:var(--bg)}
+.results-bar{padding:10px 24px;font-size:13px;color:var(--text-muted)}
+.results-bar strong{color:var(--text)}
+.product-list{padding:0 24px 32px;display:flex;flex-direction:column;gap:14px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);display:flex;overflow:hidden;transition:box-shadow .2s}
+.card:hover{box-shadow:var(--shadow)}
+.card-gallery{width:260px;flex-shrink:0;display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:var(--border)}
+.img-main{grid-row:span 2;position:relative;overflow:hidden}
+.card-gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.img-placeholder{width:100%;height:100%;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--border);font-size:28px}
+.img-count{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:2px 7px;border-radius:20px}
+.card-body{flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card-meta{font-size:11px;color:var(--text-muted)}
+.card-title{font-size:15px;font-weight:600;color:var(--text);line-height:1.4}
+.card-desc{font-size:13px;color:var(--text-muted);line-height:1.7;background:var(--green-light);border-left:3px solid var(--green-mid);padding:8px 10px;border-radius:0 6px 6px 0;white-space:pre-line}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--border);color:var(--text-muted);background:var(--bg)}
+.tag-price{background:var(--gold-light);border-color:var(--gold);color:#7a5f1a;font-weight:600}
+.tag-loai{background:var(--green-light);border-color:var(--green-mid);color:var(--green)}
+.agent-strip{display:flex;align-items:center;gap:8px;padding-top:8px;border-top:1px solid var(--border);margin-top:auto}
+.agent-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--green-light)}
+.agent-ph{width:36px;height:36px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--green);border:2px solid var(--green-mid);flex-shrink:0}
+.agent-info{flex:1}
+.agent-name{font-size:13px;font-weight:600}
+.agent-phone{font-size:12px;color:var(--text-muted)}
+.agent-code{font-size:11px;color:var(--text-muted)}
+.card-actions{display:flex;flex-direction:column;gap:8px;padding:14px 14px 14px 0;justify-content:center;flex-shrink:0}
+.btn-detail{height:34px;padding:0 14px;border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--text);background:var(--white);cursor:pointer;white-space:nowrap}
+.btn-detail:hover{background:var(--bg)}
+.btn-dl{height:34px;padding:0 14px;border:1px solid var(--green);border-radius:6px;font-size:12px;color:var(--green);background:var(--green-light);cursor:pointer;white-space:nowrap;display:none}
+.btn-dl:hover{background:#c8e8d8}
+.logged-in .btn-dl{display:block}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:var(--radius);padding:32px;width:360px;text-align:center}
+.modal h2{font-size:18px;margin-bottom:6px;color:var(--green)}
+.modal p{font-size:13px;color:var(--text-muted);margin-bottom:20px;line-height:1.6}
+.btn-google{width:100%;height:44px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:500;cursor:pointer;background:var(--white);color:var(--text);margin-bottom:10px}
+.btn-google:hover{background:var(--bg)}
+.btn-cancel{font-size:12px;color:var(--text-muted);cursor:pointer;background:none;border:none}
+.empty{text-align:center;padding:48px 24px;color:var(--text-muted);font-size:14px}
+footer{background:var(--white);border-top:1px solid var(--border);padding:20px 24px;text-align:center;font-size:12px;color:var(--text-muted);margin-top:16px}
+footer strong{color:var(--green)}
+@media(max-width:640px){.card{flex-direction:column}.card-gallery{width:100%;height:180px}.card-actions{flex-direction:row;padding:0 14px 14px}}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-logo">
     <div class="logo-icon">SKV</div>
@@ -181,58 +86,38 @@
     </div>
   </div>
 </nav>
-
 <div class="filter-wrap">
   <input type="text" id="f-duong" placeholder="🔍 Tìm tên đường..." oninput="doFilter()">
   <select id="f-loai" onchange="doFilter()">
     <option value="">Loại BĐS</option>
-    <option>Nhà đất trong hẻm</option>
-    <option>Nhà đất mặt tiền</option>
-    <option>Nhà đất trong dự án</option>
-    <option>Biệt thự, nhà vườn</option>
-    <option>Chung cư, căn hộ</option>
-    <option>Kho xưởng, văn phòng, TMDV</option>
-    <option>Đất nông nghiệp, đất sào, đất rẫy</option>
-    <option>Khách sạn, nhà hàng</option>
-    <option>Dãy trọ, căn hộ dịch vụ</option>
-    <option>Kiot, mặt bằng, quán</option>
+    <option>Nhà đất trong hẻm</option><option>Nhà đất mặt tiền</option>
+    <option>Nhà đất trong dự án</option><option>Biệt thự, nhà vườn</option>
+    <option>Chung cư, căn hộ</option><option>Kho xưởng, văn phòng, TMDV</option>
+    <option>Đất nông nghiệp, đất sào, đất rẫy</option><option>Khách sạn, nhà hàng</option>
+    <option>Dãy trọ, căn hộ dịch vụ</option><option>Kiot, mặt bằng, quán</option>
   </select>
   <select id="f-gia" onchange="doFilter()">
     <option value="">Mức giá</option>
-    <option>Dưới 3 tỷ</option>
-    <option>Từ 3-5 tỷ</option>
-    <option>Từ 5-7 tỷ</option>
-    <option>Từ 7-10 tỷ</option>
-    <option>Từ 10-20 tỷ</option>
-    <option>Trên 20 tỷ</option>
+    <option>Dưới 3 tỷ</option><option>Từ 3-5 tỷ</option><option>Từ 5-7 tỷ</option>
+    <option>Từ 7-10 tỷ</option><option>Từ 10-20 tỷ</option><option>Trên 20 tỷ</option>
   </select>
   <select id="f-kv" onchange="doFilter()">
     <option value="">Khu vực</option>
-    <option>Phường Buôn Ma Thuột</option>
-    <option>Phường Ea Kao</option>
-    <option>Phường Tân An</option>
-    <option>Phường Tân Lập</option>
-    <option>Phường Thành Nhất</option>
-    <option>Xã Hòa Phú</option>
-    <option>Khu vực khác</option>
+    <option>Phường Buôn Ma Thuột</option><option>Phường Ea Kao</option>
+    <option>Phường Tân An</option><option>Phường Tân Lập</option>
+    <option>Phường Thành Nhất</option><option>Xã Hòa Phú</option><option>Khu vực khác</option>
   </select>
   <select id="f-huong" onchange="doFilter()">
     <option value="">Hướng</option>
-    <option>Bắc</option><option>Đông</option><option>Đông bắc</option>
-    <option>Đông nam</option><option>Nam</option><option>Tây</option>
-    <option>Tây bắc</option><option>Tây nam</option>
+    <option>Bắc</option><option>Đông</option><option>Đông Bắc</option>
+    <option>Đông Nam</option><option>Nam</option><option>Tây</option>
+    <option>Tây Bắc</option><option>Tây Nam</option>
   </select>
   <button class="btn-reset" onclick="resetFilter()">↺ Xóa lọc</button>
 </div>
-
 <div class="results-bar" id="results-bar"></div>
 <div class="product-list" id="product-list"><div class="empty">⏳ Đang tải dữ liệu...</div></div>
-
-<footer>
-  <strong>Sky Villa Buôn Ma Thuột</strong> · Hệ thống quản lý bất động sản nội bộ<br>
-  Dữ liệu cập nhật tự động từ Google Sheets
-</footer>
-
+<footer><strong>Sky Villa Buôn Ma Thuột</strong> · Hệ thống quản lý bất động sản nội bộ<br>Dữ liệu cập nhật tự động từ Google Sheets</footer>
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div style="font-size:36px;margin-bottom:12px">🏡</div>
@@ -245,167 +130,176 @@
     <button class="btn-cancel" onclick="closeLogin()">Hủy</button>
   </div>
 </div>
-
 <script>
-const SHEET_ID = '1KjX-X8XCHY1uo4T7nyL-vzc9qbTqKKUz2tQGb37m9DY';
-let allProducts = [], allAgents = {}, isLoggedIn = false;
+const SHEET_ID='1KjX-X8XCHY1uo4T7nyL-vzc9qbTqKKUz2tQGb37m9DY';
+let allProducts=[],allAgents={},isLoggedIn=false;
 
-function driveThumb(url) {
-  if (!url) return null;
-  const m = url.match(/\/d\/([^\/\?]+)/);
-  return m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w400` : null;
+function driveThumb(url){
+  if(!url)return null;
+  const m=url.match(/\/d\/([^\/\?]+)/);
+  return m?`https://drive.google.com/thumbnail?id=${m[1]}&sz=w400`:null;
 }
-function driveView(url) {
-  if (!url) return null;
-  const m = url.match(/\/d\/([^\/\?]+)/);
-  return m ? `https://drive.google.com/uc?export=view&id=${m[1]}` : url;
+function driveView(url){
+  if(!url)return null;
+  const m=url.match(/\/d\/([^\/\?]+)/);
+  return m?`https://drive.google.com/uc?export=view&id=${m[1]}`:url;
 }
 
-async function fetchSheet(name) {
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent(name)}`;
-  const res = await fetch(url);
-  const text = await res.text();
-  const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]+)\)/)[1]);
-  const cols = json.table.cols.map(c => c.label);
-  return json.table.rows.map(row => {
-    const obj = {};
-    cols.forEach((col, i) => { obj[col] = row.c[i] ? (row.c[i].v || '') : ''; });
+async function fetchSheet(name){
+  const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent(name)}`;
+  const res=await fetch(url);
+  const text=await res.text();
+  const json=JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]+)\)/)[1]);
+  const cols=json.table.cols.map(c=>c.label);
+  return json.table.rows.map(row=>{
+    const obj={};
+    cols.forEach((col,i)=>{obj[col]=row.c[i]?(row.c[i].v||''):'';});
     return obj;
   });
 }
 
-async function loadData() {
-  try {
-    const [products, agents] = await Promise.all([
+async function loadData(){
+  try{
+    const [products,agents]=await Promise.all([
       fetchSheet('NGUỒN BÁN'),
       fetchSheet('NHÂN VIÊN')
     ]);
-    agents.forEach(a => { allAgents[a['MÃ NHÂN VIÊN']] = a; });
-    allProducts = products.filter(p => p['MÃ SP']);
-    document.getElementById('nav-count').textContent = allProducts.length + ' sản phẩm';
+    agents.forEach(a=>{if(a['MÃ NHÂN VIÊN'])allAgents[a['MÃ NHÂN VIÊN']]=a;});
+    allProducts=products.filter(p=>p['MÃ SP']);
+    document.getElementById('nav-count').textContent=allProducts.length+' sản phẩm';
     doFilter();
-  } catch(e) {
-    document.getElementById('product-list').innerHTML = '<div class="empty">⚠️ Không thể tải dữ liệu. Kiểm tra quyền truy cập Google Sheets.</div>';
+  }catch(e){
+    console.error(e);
+    document.getElementById('product-list').innerHTML='<div class="empty">⚠️ Không thể tải dữ liệu: '+e.message+'</div>';
   }
 }
 
-function buildDesc(p) {
-  const parts = [
-    `Chính chủ gởi bán ${p['LOẠI BĐS']} tại đường ${p['TÊN ĐƯỜNG']}, ${p['KHU VỰC']}.`,
-    `Diện tích ${p['DIỆN TÍCH']}${p['THỔ CƯ'] ? ' | Thổ cư: ' + p['THỔ CƯ'] : ''}`,
-    `Hướng ${p['HƯỚNG']}`,
-    `Mức giá ${p['MỨC GIÁ']}`,
-    p['MÔ TẢ NGẮN'] || ''
-  ];
-  return parts.filter(Boolean).join('\n');
+function getImg(p,n){
+  // handle trailing spaces in key like "ẢNH 4 "
+  const key=Object.keys(p).find(k=>k.trim()===('ẢNH '+n));
+  return key?p[key]:'';
 }
 
-function renderCards(items) {
-  const list = document.getElementById('product-list');
-  document.getElementById('results-bar').innerHTML = `Hiển thị <strong>${items.length}</strong> sản phẩm`;
-  if (!items.length) { list.innerHTML = '<div class="empty">🔍 Không tìm thấy sản phẩm phù hợp</div>'; return; }
+function buildDesc(p){
+  return [
+    'Chính chủ gởi bán '+(p['LOẠI BĐS']||'')+' tại đường '+(p['TÊN ĐƯỜNG']||'')+', '+(p['KHU VỰC']||'')+'.',
+    'Diện tích '+(p['DIỆN TÍCH']||'')+(p['THỔ CƯ']?' | Thổ cư: '+p['THỔ CƯ']:''),
+    'Hướng '+(p['HƯỚNG']||''),
+    'Mức giá '+(p['MỨC GIÁ']||''),
+    p['MÔ TẢ NGẮN']||''
+  ].filter(Boolean).join('\n');
+}
 
-  list.innerHTML = items.map(p => {
-    const imgs = [p['ẢNH 1'],p['ẢNH 2'],p['ẢNH 3'],p['ẢNH 4'],p['ẢNH 5']].filter(Boolean);
-    const t1 = driveThumb(imgs[0]), t2 = driveThumb(imgs[1]), t3 = driveThumb(imgs[2]);
-    const agent = allAgents[p['MÃ NHÂN VIÊN']];
-    const avUrl = agent ? driveThumb(agent['ẢNH ĐẠI DIỆN']) : null;
-    const initials = agent ? agent['TÊN'].trim().split(' ').pop()[0] : '?';
-    const desc = buildDesc(p);
-    const imgsJSON = JSON.stringify(imgs).replace(/"/g,'&quot;');
-
-    return `<div class="card">
-      <div class="card-gallery">
-        <div class="img-main">
-          ${t1 ? `<img src="${t1}" alt="ảnh" onerror="this.parentNode.innerHTML='<div class=img-placeholder>🏠</div>'">` : '<div class="img-placeholder">🏠</div>'}
-          ${imgs.length > 1 ? `<span class="img-count">📷 ${imgs.length}</span>` : ''}
-        </div>
-        <div>${t2 ? `<img src="${t2}" alt="" onerror="this.style.display='none'">` : '<div class="img-placeholder">🏠</div>'}</div>
-        <div>${t3 ? `<img src="${t3}" alt="" onerror="this.style.display='none'">` : '<div class="img-placeholder">🏠</div>'}</div>
-      </div>
-      <div class="card-body">
-        <div class="card-meta">${p['MÃ SP']} · ${p['KHU VỰC']}</div>
-        <div class="card-title">${p['TIÊU ĐỀ'] || '(Chưa có tiêu đề)'}</div>
-        <div class="card-tags">
-          <span class="tag tag-loai">${p['LOẠI BĐS']}</span>
-          <span class="tag tag-price">${p['MỨC GIÁ']}</span>
-          <span class="tag">${p['DIỆN TÍCH']}</span>
-          <span class="tag">Hướng ${p['HƯỚNG']}</span>
-          ${p['THỔ CƯ'] ? `<span class="tag">Thổ cư: ${p['THỔ CƯ']}</span>` : ''}
-        </div>
-        <div class="card-desc">${desc}</div>
-        <div class="agent-strip">
-          ${avUrl ? `<img class="agent-avatar" src="${avUrl}" alt="${agent.TÊN}" onerror="this.outerHTML='<div class=agent-avatar-ph>${initials}</div>'">` : `<div class="agent-avatar-ph">${initials}</div>`}
-          <div class="agent-info">
-            <div class="agent-name">${agent ? agent['TÊN'] : 'Không rõ'}</div>
-            <div class="agent-phone">${agent ? agent['SỐ ĐIỆN THOẠI'] : ''}</div>
+function renderCards(items){
+  const list=document.getElementById('product-list');
+  document.getElementById('results-bar').innerHTML=`Hiển thị <strong>${items.length}</strong> sản phẩm`;
+  if(!items.length){list.innerHTML='<div class="empty">🔍 Không tìm thấy sản phẩm phù hợp</div>';return;}
+  try{
+    list.innerHTML=items.map(p=>{
+      const imgs=[getImg(p,1),getImg(p,2),getImg(p,3),getImg(p,4),getImg(p,5)].filter(Boolean);
+      const t1=driveThumb(imgs[0]),t2=driveThumb(imgs[1]),t3=driveThumb(imgs[2]);
+      const agent=allAgents[(p['MÃ NHÂN VIÊN']||'').trim()]||null;
+      const avUrl=agent?driveThumb(agent['ẢNH ĐẠI DIỆN']):null;
+      const agentName=agent&&agent['TÊN']?agent['TÊN']:'Không rõ';
+      const initials=agentName!=='Không rõ'?agentName.trim().split(' ').pop()[0]:'?';
+      const desc=buildDesc(p);
+      const imgsData=JSON.stringify(imgs);
+      return `<div class="card">
+        <div class="card-gallery">
+          <div class="img-main">
+            ${t1?`<img src="${t1}" alt="anh" onerror="this.parentNode.innerHTML='<div class=img-placeholder>🏠</div>'">`:'<div class="img-placeholder">🏠</div>'}
+            ${imgs.length>1?`<span class="img-count">📷 ${imgs.length}</span>`:''}
           </div>
-          <div class="agent-code">${p['MÃ NHÂN VIÊN']}</div>
+          <div>${t2?`<img src="${t2}" alt="" onerror="this.style.display='none'">`:'<div class="img-placeholder">🏠</div>'}</div>
+          <div>${t3?`<img src="${t3}" alt="" onerror="this.style.display='none'">`:'<div class="img-placeholder">🏠</div>'}</div>
         </div>
-      </div>
-      <div class="card-actions">
-        <button class="btn-detail">👁 Xem chi tiết</button>
-        <button class="btn-dl" onclick="dlImgs(${imgsJSON})">⬇ Tải ${imgs.length} ảnh</button>
-      </div>
-    </div>`;
-  }).join('');
+        <div class="card-body">
+          <div class="card-meta">${p['MÃ SP']||''} · ${p['KHU VỰC']||''}</div>
+          <div class="card-title">${p['TIÊU ĐỀ']||'(Chưa có tiêu đề)'}</div>
+          <div class="card-tags">
+            <span class="tag tag-loai">${p['LOẠI BĐS']||''}</span>
+            <span class="tag tag-price">${p['MỨC GIÁ']||''}</span>
+            <span class="tag">${p['DIỆN TÍCH']||''}</span>
+            <span class="tag">Hướng ${p['HƯỚNG']||''}</span>
+            ${p['THỔ CƯ']?`<span class="tag">Thổ cư: ${p['THỔ CƯ']}</span>`:''}
+          </div>
+          <div class="card-desc">${desc}</div>
+          <div class="agent-strip">
+            ${avUrl?`<img class="agent-avatar" src="${avUrl}" alt="${agentName}" onerror="this.outerHTML='<div class=agent-ph>${initials}</div>'">`:`<div class="agent-ph">${initials}</div>`}
+            <div class="agent-info">
+              <div class="agent-name">${agentName}</div>
+              <div class="agent-phone">${agent?agent['SỐ ĐIỆN THOẠI']||agent['SDT']||'':''}</div>
+            </div>
+            <div class="agent-code">${p['MÃ NHÂN VIÊN']||''}</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-detail">👁 Xem chi tiết</button>
+          <button class="btn-dl" onclick='dlImgs(${imgsData})'>⬇ Tải ${imgs.length} ảnh</button>
+        </div>
+      </div>`;
+    }).join('');
+  }catch(e){
+    console.error('Render error:',e);
+    list.innerHTML='<div class="empty">⚠️ Lỗi hiển thị: '+e.message+'</div>';
+  }
 }
 
-function doFilter() {
-  const duong = document.getElementById('f-duong').value.toLowerCase();
-  const loai = document.getElementById('f-loai').value;
-  const gia = document.getElementById('f-gia').value;
-  const kv = document.getElementById('f-kv').value;
-  const huong = document.getElementById('f-huong').value;
-  renderCards(allProducts.filter(p =>
-    (!duong || (p['TÊN ĐƯỜNG']||'').toLowerCase().includes(duong)) &&
-    (!loai || p['LOẠI BĐS'] === loai) &&
-    (!gia || p['MỨC GIÁ'] === gia) &&
-    (!kv || p['KHU VỰC'] === kv) &&
-    (!huong || p['HƯỚNG'] === huong)
+function doFilter(){
+  const duong=document.getElementById('f-duong').value.toLowerCase();
+  const loai=document.getElementById('f-loai').value;
+  const gia=document.getElementById('f-gia').value;
+  const kv=document.getElementById('f-kv').value;
+  const huong=document.getElementById('f-huong').value;
+  renderCards(allProducts.filter(p=>
+    (!duong||(p['TÊN ĐƯỜNG']||'').toLowerCase().includes(duong))&&
+    (!loai||p['LOẠI BĐS']===loai)&&
+    (!gia||p['MỨC GIÁ']===gia)&&
+    (!kv||p['KHU VỰC']===kv)&&
+    (!huong||(p['HƯỚNG']||'').toLowerCase()===huong.toLowerCase())
   ));
 }
 
-function resetFilter() {
-  document.getElementById('f-duong').value = '';
-  ['f-loai','f-gia','f-kv','f-huong'].forEach(id => document.getElementById(id).selectedIndex = 0);
+function resetFilter(){
+  document.getElementById('f-duong').value='';
+  ['f-loai','f-gia','f-kv','f-huong'].forEach(id=>document.getElementById(id).selectedIndex=0);
   doFilter();
 }
 
-function openLogin() { document.getElementById('modal').classList.add('open'); }
-function closeLogin() { document.getElementById('modal').classList.remove('open'); }
+function openLogin(){document.getElementById('modal').classList.add('open');}
+function closeLogin(){document.getElementById('modal').classList.remove('open');}
 
-function mockLogin() {
-  isLoggedIn = true;
+function mockLogin(){
+  isLoggedIn=true;
   closeLogin();
   document.body.classList.add('logged-in');
-  const agent = Object.values(allAgents)[0];
-  const avUrl = agent ? driveThumb(agent['ẢNH ĐẠI DIỆN']) : null;
-  document.getElementById('auth-area').innerHTML = `<div class="user-info">
-    ${avUrl ? `<img class="user-avatar" src="${avUrl}" alt="av" onerror="this.style.display='none'">` : ''}
-    <span>${agent ? agent['TÊN'] : 'Nhân viên'}</span>
+  const agent=Object.values(allAgents)[0];
+  const avUrl=agent?driveThumb(agent['ẢNH ĐẠI DIỆN']):null;
+  document.getElementById('auth-area').innerHTML=`<div class="user-info">
+    ${avUrl?`<img class="user-avatar" src="${avUrl}" alt="av" onerror="this.style.display='none'">`:''}
+    <span>${agent?agent['TÊN']:'Nhân viên'}</span>
     <button class="btn-reset" onclick="logout()" style="height:28px;font-size:12px">Đăng xuất</button>
   </div>`;
 }
 
-function logout() {
-  isLoggedIn = false;
+function logout(){
+  isLoggedIn=false;
   document.body.classList.remove('logged-in');
-  document.getElementById('auth-area').innerHTML = `<button class="btn-login" onclick="openLogin()">🔐 Đăng nhập nhân viên</button>`;
+  document.getElementById('auth-area').innerHTML=`<button class="btn-login" onclick="openLogin()">🔐 Đăng nhập nhân viên</button>`;
 }
 
-function dlImgs(urls) {
-  if (!isLoggedIn) { openLogin(); return; }
-  urls.forEach((url, i) => {
-    setTimeout(() => {
-      const a = document.createElement('a');
-      a.href = driveView(url);
-      a.download = 'anh_' + (i+1) + '.jpg';
-      a.target = '_blank';
+function dlImgs(urls){
+  if(!isLoggedIn){openLogin();return;}
+  urls.forEach((url,i)=>{
+    setTimeout(()=>{
+      const a=document.createElement('a');
+      a.href=driveView(url);
+      a.download='anh_'+(i+1)+'.jpg';
+      a.target='_blank';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    }, i * 400);
+    },i*400);
   });
 }
 
