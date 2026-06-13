@@ -277,8 +277,8 @@ async function fetchSheet(name) {
 async function loadData() {
   try {
     const [products, agents] = await Promise.all([
-      fetchSheet('Trang tính1'),
-      fetchSheet('Nhan vien')
+      fetchSheet('NGUỒN BÁN'),
+      fetchSheet('NHÂN VIÊN')
     ]);
     agents.forEach(a => { allAgents[a['MÃ NHÂN VIÊN']] = a; });
     allProducts = products.filter(p => p['MÃ SP']);
